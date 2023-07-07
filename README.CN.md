@@ -5,7 +5,7 @@
   <br />
   <h3 align="center">
   <span>
-    <a href="./README.md">英文</a> | 
+    <a href="./README.md">英文</a> |
     <a>中文</a>
   </span>
   <h3>
@@ -26,11 +26,11 @@
 
 ```bash
 # npm
-$ npm i dumi-theme-chakra -D
+$ npm i dumi-theme-flex -D
 # yarn
-$ yarn add dumi-theme-chakra -D
+$ yarn add dumi-theme-flex -D
 # pnpm
-$ pnpm add dumi-theme-chakra -D
+$ pnpm add dumi-theme-flex -D
 ```
 
 ## Configure
@@ -39,7 +39,7 @@ $ pnpm add dumi-theme-chakra -D
 
 ```ts
 import { defineConfig } from 'dumi';
-import { defineThemeConfig } from 'dumi-theme-chakra';
+import { defineThemeConfig } from 'dumi-theme-flex';
 
 export defineConfig({
   themeConfig: {
@@ -107,6 +107,22 @@ export type ThemeConfig = DocProviderProps & {
      */
     theme?: CodeTheme;
   };
+  /**
+   * hd solution configurations
+   * @note  base on https://github.com/umijs/umi-hd
+   */
+  hd?: {
+    rules: {
+      minWidth?: number;
+      maxWidth?: number;
+      mode: 'vl' | 'flex' | 'vw' | 'vh';
+      options?: number | [number, number];
+    }[];
+  };
+  /**
+   * set device width in desktop
+   */
+  deviceWidth?: number;
 };
 ```
 
