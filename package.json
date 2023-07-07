@@ -32,9 +32,7 @@
     "lint": "pnpm run lint:es && pnpm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepublishOnly": "father doctor && pnpm run build:father",
-    "version": "changeset && changeset version",
-    "release": "changeset publish"
+    "prepublishOnly": "father doctor && pnpm run build:father"
   },
   "commitlint": {
     "extends": [
