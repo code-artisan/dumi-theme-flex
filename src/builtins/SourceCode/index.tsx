@@ -1,27 +1,27 @@
-import React, { type FC, type PropsWithChildren, useMemo } from 'react';
+import React, { useMemo, type FC, type PropsWithChildren } from 'react';
 
+import { Box, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import Highlight, {
   defaultProps,
   type Language,
   type PrismTheme
 } from 'prism-react-renderer';
-import { Stack, HStack, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import Copy from '../../components/Copy';
 
 import dracula from 'prism-react-renderer/themes/dracula';
-import duotoneLight from 'prism-react-renderer/themes/duotoneLight';
 import duotoneDark from 'prism-react-renderer/themes/duotoneDark';
+import duotoneLight from 'prism-react-renderer/themes/duotoneLight';
 import github from 'prism-react-renderer/themes/github';
-import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 import nightOwlDark from 'prism-react-renderer/themes/nightOwl';
+import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 import oceanicNext from 'prism-react-renderer/themes/oceanicNext';
 import okaidia from 'prism-react-renderer/themes/okaidia';
 import palenight from 'prism-react-renderer/themes/palenight';
 import shadesOfPurple from 'prism-react-renderer/themes/shadesOfPurple';
 import synthwave84 from 'prism-react-renderer/themes/synthwave84';
 import ultramin from 'prism-react-renderer/themes/ultramin';
-import vsLight from 'prism-react-renderer/themes/vsLight';
 import vsDark from 'prism-react-renderer/themes/vsDark';
+import vsLight from 'prism-react-renderer/themes/vsLight';
 
 export enum PRISMTHEME {
   DRACULA = 'dracula',
@@ -109,7 +109,7 @@ const SourceCode: FC<PropsWithChildren<SourceCodeProps>> = ({
   const hightLightTheme = useColorModeValue(lightTheme, darkTheme);
 
   return (
-    <Stack w="full" position="relative">
+    <Stack w="full" position="relative" style={{ overflow: 'hidden' }}>
       <HStack
         w="full"
         justifyContent="flex-end"
