@@ -1,9 +1,24 @@
 {
-  "name": "dumi-theme-chakra",
+  "name": "dumi-theme-flex",
   "version": "0.0.21",
-  "description": "chakra theme for dumi2",
-  "types": "dist/types.d.ts",
+  "description": "dumi-theme-flex",
+  "keywords": [
+    "dumi",
+    "dumi-theme",
+    "chakra",
+    "mobile"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code-artisan/dumi-theme-flex.git",
+    "branch": "main"
+  },
+  "license": "MIT",
   "main": "dist/cjs/index.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "run-p dev:*",
     "build": "run-s build:*",
@@ -21,18 +36,6 @@
     "version": "changeset && changeset version",
     "release": "changeset publish"
   },
-  "keywords": [
-    "dumi",
-    "dumi-theme",
-    "chakra"
-  ],
-  "authors": [
-    "innocces<jiangjiangjiangxi@gmail.com>"
-  ],
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -55,14 +58,29 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "peerDependencies": {
-    "dumi": "^2.0.12",
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+  "dependencies": {
+    "@ant-design/icons-svg": "*4.2.1",
+    "@babel/runtime": "^7.22.5",
+    "@chakra-ui/icons": "^2.0.19",
+    "@chakra-ui/react": "^2.7.1",
+    "@chakra-ui/theme-tools": "^2.0.18",
+    "@docsearch/css": "^3.5.1",
+    "@docsearch/react": "^3.5.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/inter": "^5.0.3",
+    "@makotot/ghostui": "^2.0.0",
+    "animated-scroll-to": "^2.3.0",
+    "clsx": "^1.2.1",
+    "cmdk": "^0.1.22",
+    "f2-touchemulator": "*0.1.0",
+    "framer-motion": "^7.10.3",
+    "heti": "^0.9.4",
+    "prism-react-renderer": "^1.3.5",
+    "qrcode.react": "*3.1.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-icons": "^4.10.1",
+    "umi-hd": "*5.0.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
@@ -88,32 +106,19 @@
     "react-dom": "^18.2.0",
     "stylelint": "^14.16.1"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.22.5",
-    "@chakra-ui/icons": "^2.0.19",
-    "@chakra-ui/react": "^2.7.1",
-    "@chakra-ui/theme-tools": "^2.0.18",
-    "@docsearch/css": "^3.5.1",
-    "@docsearch/react": "^3.5.1",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource-variable/inter": "^5.0.3",
-    "@makotot/ghostui": "^2.0.0",
-    "animated-scroll-to": "^2.3.0",
-    "clsx": "^1.2.1",
-    "cmdk": "^0.1.22",
-    "framer-motion": "^7.10.3",
-    "heti": "^0.9.4",
-    "prism-react-renderer": "^1.3.5",
-    "react-copy-to-clipboard": "^5.1.0",
-    "react-icons": "^4.10.1"
+  "peerDependencies": {
+    "dumi": "^2.0.12",
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
   "engines": {
     "node": ">=14"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/innocces/dumi-theme-chakra.git",
-    "branch": "main"
-  }
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "authors": [
+    "artisan<codes.artisan@gmail.com>"
+  ]
 }

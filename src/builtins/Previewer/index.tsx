@@ -1,131 +1,53 @@
-import React, { useMemo, useRef, type FC, type PropsWithChildren } from 'react';
-import { type IPreviewerProps, useLocation, useLocale } from 'dumi';
+import { IPreviewerProps, useRouteMeta, useSiteData } from 'dumi';
+import Previewer from 'dumi/theme-default/builtins/Previewer';
+import Device from 'dumi/theme/slots/Device';
+import React, { useCallback, useEffect, useState, type FC } from 'react';
+import './index.less';
 
-import PreviewerActions from 'dumi/theme/slots/PreviewerActions';
-import {
-  Stack,
-  HStack,
-  Heading,
-  Text,
-  LinkOverlay,
-  LinkBox,
-  Badge,
-  Box,
-  useColorModeValue
-} from '@chakra-ui/react';
+const MobilePreviewer: FC<IPreviewerProps> = (props) => {
+  const {
+    frontmatter: { mobile = true }
+  } = useRouteMeta();
+  const { themeConfig } = useSiteData();
+  const generateUrl = useCallback((p: typeof props) => {
+    const [pathname, search] = p.demoUrl.split('?');
+    const params = new URLSearchParams(search);
 
-import { getLocalValue } from '../../factory/tools';
+    if (p.compact) params.set('compact', '');
+    if (p.background) params.set('background', p.background);
 
-const Previewer: FC<PropsWithChildren<IPreviewerProps>> = (props) => {
-  const { asset, iframe, children, className, debug, style, demoUrl, compact } =
-    props;
+    return `${pathname}?${params.toString()}`.replace(/\?$/, '');
+  }, []);
+  const [demoUrl, setDemoUrl] = useState(() => generateUrl(props));
 
-  const locale = useLocale();
-  const { hash } = useLocation();
-  const demoContainer = useRef<HTMLDivElement>(null);
-  const link = `#${asset.id}`;
-  const previewBgColor = useColorModeValue('whiteAlpha.900', 'gray.800');
-  const headingDefaultBorderColor = useColorModeValue(
-    'gray.200',
-    'whiteAlpha.200'
-  );
-  const title = getLocalValue(locale, props, 'title');
-  const description = getLocalValue(locale, props, 'description');
-
-  const borderColor = useMemo(() => {
-    return link === hash ? 'brand.400' : debug ? 'yellow.300' : 'transparent';
-  }, [link, hash, debug]);
-
-  const headingBorderColor = useMemo(() => {
-    return link === hash
-      ? 'brand.400'
-      : debug
-      ? 'yellow.300'
-      : headingDefaultBorderColor;
-  }, [link, hash, debug, headingDefaultBorderColor]);
+  useEffect(() => {
+    setDemoUrl(generateUrl(props));
+  }, [props.compact, props.background]);
 
   return (
-    <Stack
-      className={className}
-      style={style}
-      id={asset.id}
-      marginBlockStart={6}
-      marginBlockEnd={8}
-      shadow="sm"
-      border="1px solid"
-      borderColor={borderColor}
-      overflow="hidden"
-      borderRadius="base"
-      bgColor={previewBgColor}
+    <Previewer
+      {...props}
+      demoUrl={demoUrl}
+      iframe={mobile ? false : props?.iframe}
+      className={mobile ? 'dumi-mobile-previewer' : undefined}
+      forceShowCode={mobile}
+      style={{
+        '--device-width': themeConfig.deviceWidth
+          ? `${themeConfig.deviceWidth}px`
+          : undefined
+      }}
     >
-      {(title || debug) && (
-        <LinkBox>
-          <Heading as="h5">
-            <LinkOverlay href={link}>
-              <HStack
-                align="center"
-                justify="center"
-                w="full"
-                paddingBlock={2}
-                shadow="sm"
-              >
-                <Text
-                  fontSize="sm"
-                  whiteSpace="nowrap"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                >
-                  {title}
-                </Text>
-                {debug && <Badge colorScheme="yellow">DEV ONLY</Badge>}
-              </HStack>
-            </LinkOverlay>
-          </Heading>
-        </LinkBox>
-      )}
-      {description && (
-        <Text
-          className="markdown"
-          dangerouslySetInnerHTML={{ __html: description }}
-          padding={2}
-          borderBottom="1px solid"
-          borderBottomColor={headingBorderColor}
-          m="0!important"
-        ></Text>
-      )}
-
-      <Box
-        paddingBlock={iframe || compact ? 0 : 10}
-        paddingInline={iframe || compact ? 0 : 5}
-        ref={demoContainer}
-      >
-        {iframe ? (
-          <Box
-            as="iframe"
-            src={demoUrl}
-            h={
-              (['string', 'number'].includes(typeof iframe)
-                ? iframe
-                : 80) as number
-            }
-            w="full"
-          ></Box>
-        ) : (
-          children
-        )}
-      </Box>
-      <Box>
-        <PreviewerActions
-          {...props}
-          demoContainer={
-            iframe
-              ? demoContainer.current?.firstElementChild
-              : demoContainer.current
+      {mobile && (
+        <Device
+          url={demoUrl}
+          inlineHeight={
+            typeof props.iframe === 'number' ? props.iframe : undefined
           }
         />
-      </Box>
-    </Stack>
+      )}
+      {!mobile && props?.children}
+    </Previewer>
   );
 };
 
-export default Previewer;
+export default MobilePreviewer;

@@ -1,9 +1,9 @@
+import type { CodeTheme, PRISMTHEME } from './builtins/SourceCode';
 import type { DocProviderProps } from './components/DocProvider';
 import type { SocialMap } from './components/Social';
-import type { Search } from './slots/SearchResult';
 import type { AnnouncementBarConfig } from './slots/AnnouncementBar';
 import type { HeroConfig } from './slots/Hero';
-import type { CodeTheme, PRISMTHEME } from './builtins/SourceCode';
+import type { Search } from './slots/SearchResult';
 
 export { PRISMTHEME };
 
@@ -75,4 +75,21 @@ export type ThemeConfig = DocProviderProps & {
      */
     theme?: CodeTheme;
   };
+
+  /**
+   * hd solution configurations
+   * @note  base on https://github.com/umijs/umi-hd
+   */
+  hd?: {
+    rules: {
+      minWidth?: number;
+      maxWidth?: number;
+      mode: 'vl' | 'flex' | 'vw' | 'vh';
+      options?: number | [number, number];
+    }[];
+  };
+  /**
+   * set device width in desktop
+   */
+  deviceWidth?: number;
 };
