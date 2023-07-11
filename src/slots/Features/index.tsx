@@ -1,16 +1,15 @@
 import React, { type FC, type PropsWithChildren } from 'react';
 
 import {
-  Container,
-  SimpleGrid,
-  Heading,
-  Image,
-  Text,
   Card,
   CardBody,
+  Container,
+  Heading,
+  Image,
+  SimpleGrid,
   Stack,
   Tag,
-  useColorModeValue
+  Text
 } from '@chakra-ui/react';
 import { Link } from 'dumi';
 import useFeatures from '../../hooks/useFeatures';
@@ -39,8 +38,8 @@ const Title: FC<PropsWithChildren<{ link?: string }>> = ({
 const Features: FC = () => {
   const features = useFeatures();
 
-  const cardBackground = useColorModeValue('blackAlpha.50', 'gray.700');
-  const cardIconBackground = useColorModeValue('blackAlpha.50', 'gray.500');
+  // const cardBackground = useColorModeValue('blackAlpha.50', 'gray.700');
+  // const cardIconBackground = useColorModeValue('blackAlpha.50', 'gray.500');
 
   if (!features?.length) return null;
 
@@ -51,10 +50,16 @@ const Features: FC = () => {
           <Card
             key={title}
             m="3%"
-            bg={cardBackground}
-            backdropFilter="saturate(50%) blur(8px)"
+            shadow={'none'}
+            bg={'none'}
+            // bg={cardBackground}
+            // backdropFilter="saturate(50%) blur(8px)"
           >
-            <CardBody>
+            <CardBody
+              display="flex"
+              flexDirection={'column'}
+              alignItems={'center'}
+            >
               {(emoji || icon) && (
                 <Stack
                   w={12}
@@ -62,10 +67,10 @@ const Features: FC = () => {
                   justify="center"
                   align="center"
                   mb={5}
-                  borderRadius="md"
-                  bg={cardIconBackground}
+                  // borderRadius="md"
+                  // bg={cardIconBackground}
                 >
-                  {emoji && <Text fontSize={6}>{emoji}</Text>}
+                  {emoji && <Text fontSize={24}>{emoji}</Text>}
                   {icon && (
                     <Image
                       ml={emoji ? 1.5 : 0}
@@ -87,7 +92,7 @@ const Features: FC = () => {
                   <Title link={link}>{title}</Title>
                   {tag && (
                     <Tag
-                      bg={cardIconBackground}
+                      // bg={cardIconBackground}
                       opacity={0.7}
                       ml={2}
                       colorScheme="brand"
