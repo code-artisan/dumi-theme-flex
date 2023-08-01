@@ -118,6 +118,7 @@ const DocLayout: FC = () => {
       <Box
         minH="screenH"
         display="flex"
+        height="100%"
         flexDirection="column"
         backgroundImage={docBackgroundImage}
         backgroundSize="cover"
