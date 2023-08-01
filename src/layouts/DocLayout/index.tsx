@@ -128,62 +128,68 @@ const DocLayout: FC = () => {
             <SettingPanel />
           </Show>
         )}
-        <AnnouncementBar />
-        <Header>
-          <NavBar
-            isOpen={navDisclosure.isOpen}
-            onClose={navDisclosure.onClose}
-          />
-        </Header>
-        {sidebar && (
-          <Hide above="md">
-            <Box position="sticky" top={18} zIndex={10}>
-              <HStack
-                justify="space-between"
-                bg={sidebarMenuBg}
-                borderTop="1px"
-                borderTopColor={sidebarMenuBorderColor}
-                borderTopStyle="solid"
-              >
-                <Button variant="ghost" onClick={onOpen}>
-                  <HamburgerIcon />
-                </Button>
-                <Button variant="ghost" onClick={navDisclosure.onOpen}>
-                  <HamburgerIcon />
-                </Button>
-              </HStack>
-            </Box>
-          </Hide>
+        {routeMeta.frontmatter.layout === 'none' ? (
+          outlet
+        ) : (
+          <>
+            <AnnouncementBar />
+            <Header>
+              <NavBar
+                isOpen={navDisclosure.isOpen}
+                onClose={navDisclosure.onClose}
+              />
+            </Header>
+            {sidebar && (
+              <Hide above="md">
+                <Box position="sticky" top={18} zIndex={10}>
+                  <HStack
+                    justify="space-between"
+                    bg={sidebarMenuBg}
+                    borderTop="1px"
+                    borderTopColor={sidebarMenuBorderColor}
+                    borderTopStyle="solid"
+                  >
+                    <Button variant="ghost" onClick={onOpen}>
+                      <HamburgerIcon />
+                    </Button>
+                    <Button variant="ghost" onClick={navDisclosure.onOpen}>
+                      <HamburgerIcon />
+                    </Button>
+                  </HStack>
+                </Box>
+              </Hide>
+            )}
+            <Hero />
+            <Features />
+            <Container
+              maxW="container.xxl"
+              paddingInline={6}
+              flexGrow={1}
+              display="flex"
+              className="chakra-theme-container"
+            >
+              <SideBar isOpen={isOpen} onClose={onClose} />
+              <Content>
+                <Box flexGrow={1} position="relative">
+                  {outlet}
+                </Box>
+                <Footer />
+              </Content>
+              {routeMeta?.frontmatter?.toc === 'content' && (
+                <Show above="md">
+                  <Box
+                    pt={8}
+                    h="calc(100vh - var(--chakra-sizes-18))"
+                    position="sticky"
+                    top={18}
+                  >
+                    <Toc />
+                  </Box>
+                </Show>
+              )}
+            </Container>
+          </>
         )}
-        <Hero />
-        <Features />
-        <Container
-          maxW="container.xxl"
-          paddingInline={6}
-          flexGrow={1}
-          display="flex"
-          className="chakra-theme-container"
-        >
-          <SideBar isOpen={isOpen} onClose={onClose} />
-          <Content>
-            <Box flexGrow={1} position="relative">
-              {outlet}
-            </Box>
-            <Footer />
-          </Content>
-          {routeMeta?.frontmatter?.toc === 'content' && (
-            <Show above="md">
-              <Box
-                pt={8}
-                h="calc(100vh - var(--chakra-sizes-18))"
-                position="sticky"
-                top={18}
-              >
-                <Toc />
-              </Box>
-            </Show>
-          )}
-        </Container>
       </Box>
     </>
   );
