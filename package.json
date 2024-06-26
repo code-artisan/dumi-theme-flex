@@ -89,8 +89,8 @@
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^18.2.6",
     "@umijs/lint": "^4.0.72",
-    "dumi": "^2.2.1",
-    "dumi-assets-types": "^1.0.1",
+    "dumi": "^2.3.8",
+    "dumi-assets-types": "^2.3.0",
     "eslint": "^8.44.0",
     "father": "^4.2.3",
     "father-plugin-dumi-theme": "1.0.0-rc.1",
@@ -105,7 +105,7 @@
     "stylelint": "^14.16.1"
   },
   "peerDependencies": {
-    "dumi": "^2.0.12",
+    "dumi": "^2.3.0",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
